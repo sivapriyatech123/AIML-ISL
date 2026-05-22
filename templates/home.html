@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ISL Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global-header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script defer src="{{ url_for('static', filename='js/home.js') }}"></script>
+</head>
+
+<body>
+
+    <!-- ================= GLOBAL HEADER ================= -->
+    <header class="global-header">
+        <div class="global-header-left">
+            <button class="back-btn" onclick="window.history.back()" title="Go Back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <a href="/" class="global-header-logo">
+                <span class="logo-icon">👋</span>
+                <span class="logo-text">ISL Translator</span>
+            </a>
+        </div>
+
+        <nav class="global-header-nav">
+            <a href="/">Home</a>
+            <a href="/translator">Translator</a>
+            <a href="/learning">Learning</a>
+            <a href="/about">About</a>
+            <a href="/features">Features</a>
+            {% if session.get('user_id') %}
+            <a href="/logout" class="auth-btn logout-btn">Logout</a>
+            {% else %}
+            <a href="/login" class="auth-btn login-btn">Sign In</a>
+            <a href="/signup" class="auth-btn signup-btn">Sign Up</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="tag">Breaking Communication Barriers</span>
+
+            <h1>
+                Indian Sign Language <br>
+                <span class="gradient-text">Translator</span>
+            </h1>
+
+            <p>
+                Empowering communication for the deaf and hard-of-hearing community
+                through innovative AI technology. Translate, learn, and connect with ease.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="/translator" class="btn-primary">Get Started</a>
+                <a href="/about" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!-- ================= WHY USE ================= -->
+    <section class="why">
+        <h2>
+            Why Use Our <span class="gradient-text">Sign Language Translator</span>
+        </h2>
+
+        <p class="subtitle">
+            Discover how our platform makes communication accessible, inclusive, and effortless.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon purple">✨</div>
+                <h3>Easy to Use</h3>
+                <p>
+                    Simple and intuitive interface designed for everyone.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon blue">👥</div>
+                <h3>Inclusive Communication</h3>
+                <p>
+                    Bridges the gap between deaf and hearing communities.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon orange">⚡</div>
+                <h3>Real-time Translation</h3>
+                <p>
+                    AI-powered gesture detection with instant results.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="cta">
+        <h2>Ready to Start Your Journey?</h2>
+        <p>
+            Join thousands of users who are already breaking communication barriers.
+
+        </p>
+        <p> . </p>
+        <div class="cta-buttons">
+            <a href="/signup" class="btn-primary">Sign Up Now</a>
+            <a href="/features" class="btn-secondary">Explore Features</a>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <p>© 2026 ISL Translator | Empowering Inclusive Communication</p>
+    </footer>
+
+</body>
+
+</html>

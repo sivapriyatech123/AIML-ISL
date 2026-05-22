@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ISL Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global-header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/translator.css') }}">
+
+    <!-- Three.js and GLTFLoader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <script defer src="{{ url_for('static', filename='js/translator.js') }}"></script>
+</head>
+
+<body>
+
+    <!-- ================= GLOBAL HEADER ================= -->
+    <header class="global-header">
+        <div class="global-header-left">
+            <button class="back-btn" onclick="window.history.back()" title="Go Back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <a href="/" class="global-header-logo">
+                <span class="logo-icon">👋</span>
+                <span class="logo-text">ISL Translator</span>
+            </a>
+        </div>
+
+        <nav class="global-header-nav">
+            <a href="/">Home</a>
+            <a href="/translator">Translator</a>
+            <a href="/learning">Learning</a>
+            <a href="/about">About</a>
+            <a href="/features">Features</a>
+            {% if session.get('user_id') %}
+            <a href="/logout" class="auth-btn logout-btn">Logout</a>
+            {% else %}
+            <a href="/login" class="auth-btn login-btn">Sign In</a>
+            <a href="/signup" class="auth-btn signup-btn">Sign Up</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <!-- TITLE -->
+        <section class="title">
+            <h1>ISL <span>Translator</span></h1>
+            <p>Bridge the communication gap with real-time Indian Sign Language translation</p>
+        </section>
+
+        <!-- MODE SWITCH -->
+        <div class="mode-switch">
+            <button id="btnModeSignToText" class="active" onclick="switchMode('signToText')">✋ Sign to Text /
+                Voice</button>
+            <button id="btnModeTextToSign" onclick="switchMode('textToSign')">💬 Text / Voice to Sign</button>
+        </div>
+
+        <!-- MODULE 1: SIGN TO TEXT (Camera) -->
+        <div id="signToTextSection">
+            <!-- CAMERA CARD -->
+            <section class="card">
+                <div class="card-header">📷 Camera Input</div>
+                <p class="subtext">Perform sign language gestures in front of the camera</p>
+
+                <div class="camera-box">
+                    <div id="cameraPlaceholder" class="camera-placeholder">
+                        🤖 <br>
+                        <span>Camera is off</span>
+                    </div>
+                    <!-- Live Feed Image -->
+                    <img id="videoStream" src="" alt="Live Feed"
+                        style="display:none; width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn primary" onclick="startTranslator()">▶ Start Camera</button>
+                    <button class="btn danger" onclick="stopTranslator()">⛔ Stop Camera</button>
+                </div>
+            </section>
+
+            <!-- TEXT OUTPUT -->
+            <section class="card">
+                <div class="card-header">💬 Recognized Text</div>
+                <p class="subtext">Live translation of detected sign language</p>
+
+                <div class="output-box" id="outputText">
+                    Start the camera and perform gestures to see the translation here...
+                </div>
+
+                <!-- AUDIO CONTROLS -->
+                <div class="audio-controls">
+                    <button class="btn secondary" onclick="playAudio()">🔊 Play</button>
+                    <button class="btn warning" onclick="stopAudio()">⏹ Stop</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- MODULE 2: TEXT TO SIGN (New) -->
+        <div id="textToSignSection" style="display: none;">
+            <section class="card">
+                <div class="card-header">⌨ Input Text or Voice</div>
+                <p class="subtext">Type or speak to convert into Indian Sign Language</p>
+
+                <div class="input-area">
+                    <textarea id="textInput" placeholder="Type here or use the mic..." rows="3"></textarea>
+                    <button id="micBtn" class="mic-btn" onclick="toggleVoiceInput()">🎤</button>
+                </div>
+
+                <div class="btn-row" style="margin-top: 20px;">
+                    <button class="btn primary" onclick="convertTextToSign()">⚡ Translate to Sign</button>
+                    <button class="btn secondary" onclick="clearTextToSign()">🧹 Clear</button>
+                </div>
+            </section>
+
+            <section class="card" id="signOutputCard" style="display: none;">
+                <div class="card-header">🤟 Sign Language Output</div>
+                <div id="currentWordLabel"
+                    style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 10px; color: #333; min-height: 35px;">
+                </div>
+                <div class="sign-output-container" id="signOutputArea"
+                    style="width: 100%; height: 400px; background-color: #f0f0f0; border-radius: 12px; overflow-y: auto; overflow-x: hidden; position: relative;">
+                    <!-- 3D Avatar Container -->
+                    <div id="avatarContainer" style="width: 100%; height: 100%;"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- GESTURE FEEDBACK -->
+        <section class="card">
+            <div class="card-header">🖐 Gesture Detection Feedback</div>
+            <p class="subtext">Visual representation of detected gestures</p>
+
+            <div class="gesture-grid">
+                <div class="gesture-card">👋<span>Hello</span></div>
+                <div class="gesture-card">🙏<span>Thank You</span></div>
+                <div class="gesture-card">👍<span>Yes</span></div>
+                <div class="gesture-card">✋<span>Please</span></div>
+            </div>
+        </section>
+
+        <!-- HOW TO USE -->
+        <section class="card info">
+            <div class="card-header">ℹ️ How to Use the Translator</div>
+            <ul>
+                <li><b>Sign to Text/Voice:</b> Start the camera and perform ISL gestures.</li>
+                <li><b>Text/Voice to Sign:</b> Type or speak your message.</li>
+                <li>Ensure good lighting and clear hand visibility.</li>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+
+</html>

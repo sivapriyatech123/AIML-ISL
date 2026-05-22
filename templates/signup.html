@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account | ISL Translator</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global-header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <script defer src="{{ url_for('static', filename='js/signup.js') }}"></script>
+</head>
+
+<body>
+
+    <!-- ================= GLOBAL HEADER ================= -->
+    <header class="global-header">
+        <div class="global-header-left">
+            <button class="back-btn" onclick="window.history.back()" title="Go Back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <a href="/" class="global-header-logo">
+                <span class="logo-icon">👋</span>
+                <span class="logo-text">ISL Translator</span>
+            </a>
+        </div>
+
+        <nav class="global-header-nav">
+            <a href="/">Home</a>
+            <a href="/translator">Translator</a>
+            <a href="/learning">Learning</a>
+            <a href="/about">About</a>
+            <a href="/features">Features</a>
+            {% if session.get('user_id') %}
+            <a href="/logout" class="auth-btn logout-btn">Logout</a>
+            {% else %}
+            <a href="/login" class="auth-btn login-btn">Sign In</a>
+            <a href="/signup" class="auth-btn signup-btn">Sign Up</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- ================= BACKGROUND ================= -->
+    <div class="bg-overlay"></div>
+
+    <!-- ================= SIGNUP CARD ================= -->
+    <div class="signup-wrapper">
+
+        <div class="signup-card animate">
+
+            <!-- ICON -->
+            <div class="signup-icon">
+                👤
+            </div>
+
+            <h2>Create Account</h2>
+            <p class="subtitle">
+                Join our community and start breaking communication barriers
+            </p>
+
+            {% if error %}
+            <p class="msg error">{{ error }}</p>
+            {% endif %}
+
+            {% if success %}
+            <p class="msg success">{{ success }}</p>
+            {% endif %}
+
+            <form method="POST">
+
+                <div class="input-group">
+                    <span class="input-icon">👤</span>
+                    <input type="text" name="name" placeholder="Full Name" required>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-icon">📧</span>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    Sign Up
+                </button>
+            </form>
+
+            <p class="login-link">
+                Already have an account?
+                <a href="/login">Sign In</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

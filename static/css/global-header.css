@@ -1,0 +1,140 @@
+/* ---------- GLOBAL HEADER ---------- */
+.global-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    background: rgba(10, 10, 25, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.global-header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.global-header .back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.global-header .back-btn:hover {
+    color: #a78bfa;
+    transform: translateX(-3px);
+}
+
+.global-header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.global-header-logo:hover {
+    opacity: 0.8;
+}
+
+.global-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.global-header-nav a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.global-header-nav a:hover {
+    color: #a78bfa;
+}
+
+/* Auth Buttons in Header */
+.global-header-nav .auth-btn {
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.global-header-nav .login-btn {
+    background: linear-gradient(135deg, #7c7cff, #a855f7);
+    color: white !important;
+}
+
+.global-header-nav .login-btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.global-header-nav .signup-btn,
+.global-header-nav .logout-btn {
+    border: 1px solid #7c7cff;
+    color: #fff !important;
+}
+
+.global-header-nav .signup-btn:hover,
+.global-header-nav .logout-btn:hover {
+    background: rgba(124, 124, 255, 0.1);
+    color: #a78bfa !important;
+    border-color: #a78bfa;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .global-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .global-header-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .global-header-nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .global-header-nav {
+        gap: 10px;
+    }
+    
+    .global-header-nav a {
+        font-size: 14px;
+    }
+    
+    .global-header-nav .auth-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

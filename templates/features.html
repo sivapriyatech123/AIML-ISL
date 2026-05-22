@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Features | ISL Translator</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global-header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/features.css') }}">
+    <script defer src="{{ url_for('static', filename='js/features.js') }}"></script>
+</head>
+
+<body>
+
+    <!-- ================= GLOBAL HEADER ================= -->
+    <header class="global-header">
+        <div class="global-header-left">
+            <button class="back-btn" onclick="window.history.back()" title="Go Back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <a href="/" class="global-header-logo">
+                <span class="logo-icon">👋</span>
+                <span class="logo-text">ISL Translator</span>
+            </a>
+        </div>
+
+        <nav class="global-header-nav">
+            <a href="/">Home</a>
+            <a href="/translator">Translator</a>
+            <a href="/learning">Learning</a>
+            <a href="/about">About</a>
+            <a href="/features">Features</a>
+            {% if session.get('user_id') %}
+            <a href="/logout" class="auth-btn logout-btn">Logout</a>
+            {% else %}
+            <a href="/login" class="auth-btn login-btn">Sign In</a>
+            <a href="/signup" class="auth-btn signup-btn">Sign Up</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="features-hero reveal">
+        <span class="pill">Features</span>
+
+        <h1>
+            Powerful Features for <br>
+            <span class="gradient-text">Everyone</span>
+        </h1>
+
+        <p>
+            Discover all the amazing features that make our Indian Sign Language
+            translator the best choice for accessible communication.
+        </p>
+    </section>
+
+    <!-- ================= FEATURES LIST ================= -->
+    <section class="features-container">
+
+        <!-- Feature Card -->
+        <div class="feature-card reveal">
+            <div class="feature-content">
+                <div class="icon blue">📷</div>
+                <h2>Real-time Video Translation</h2>
+                <p>
+                    Use your device camera to capture sign language gestures and get instant
+                    translations powered by AI.
+                </p>
+            </div>
+
+            <div class="feature-image">
+                <img src="{{ url_for('static', filename='images/feature-camera.png') }}">
+            </div>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-content">
+                <div class="icon purple">🧠</div>
+                <h2>AI-Powered Recognition</h2>
+                <p>
+                    Advanced machine learning models trained on ISL gestures ensure
+                    accurate and reliable recognition.
+                </p>
+            </div>
+
+            <div class="feature-image">
+                <img src="{{ url_for('static', filename='images/feature-ai.png') }}">
+            </div>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-content">
+                <div class="icon green">📘</div>
+                <h2>Learning Mode</h2>
+                <p>
+                    Interactive tutorials and practice sessions to help you learn
+                    Indian Sign Language at your own pace.
+                </p>
+            </div>
+
+            <div class="feature-image">
+                <img src="{{ url_for('static', filename='images/feature-learning.jpg') }}">
+            </div>
+        </div>
+
+        <div class="feature-card reveal highlight">
+            <div class="feature-content">
+                <div class="icon orange">📱</div>
+                <h2>Cross-Platform Support</h2>
+                <p>
+                    Access the translator on desktop, tablet, or mobile with seamless
+                    synchronization across devices.
+                </p>
+            </div>
+
+            <div class="feature-image">
+                <img src="{{ url_for('static', filename='images/feature-mobile.png') }}">
+            </div>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-content">
+                <div class="icon red">🎤</div>
+                <h2>Voice to Sign</h2>
+                <p>
+                    Speak naturally and watch your words convert into sign language
+                    animations.
+                </p>
+            </div>
+
+            <div class="feature-image">
+                <img src="{{ url_for('static', filename='images/feature-voice.png') }}">
+            </div>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-content">
+                <div class="icon yellow">⚡</div>
+                <h2>Lightning Fast</h2>
+                <p>
+                    Optimized performance ensures translations happen in milliseconds
+                    with zero lag.
+                </p>
+            </div>
+
+            <div class="feature-image">
+                <img src="{{ url_for('static', filename='images/feature-fast.png') }}">
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ================= COMING SOON ================= -->
+    <section class="coming-soon reveal">
+        <h2>Coming Soon</h2>
+
+
+        <p>We're constantly working on new features to enhance your experience.</p>
+
+        <div class="soon-cards">
+            <div class="soon-card">
+                <h3>AR Integration</h3>
+                <p>
+                    Augmented reality overlays for immersive learning.
+                </p>
+                <span class="badge">In Development</span>
+            </div>
+
+            <div class="soon-card">
+                <h3>Multi-language Support</h3>
+                <p>
+                    Support for regional sign language variations.
+                </p>
+                <span class="badge">In Development</span>
+            </div>
+
+            <div class="soon-card">
+                <h3>Advanced Analytics</h3>
+                <p>
+                    Track your learning progress with detailed insights.
+                </p>
+                <span class="badge">In Development</span>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISL Learning Center</title>
+    <!-- Global Header Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global-header.css') }}">
+    <!-- Use home.css for shared header styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/learning.css') }}?v=2">
+    <script>
+        // Inject Server-Side User Info
+        const CURRENT_USER_ID = "{{ session.get('user_id', 'guest') }}";
+        const CURRENT_USER_NAME = "{{ session.get('user_name', 'Guest') }}";
+    </script>
+    <script defer src="{{ url_for('static', filename='js/learning.js') }}?v=2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ================= GLOBAL HEADER ================= -->
+    <header class="global-header">
+        <div class="global-header-left">
+            <button class="back-btn" onclick="window.history.back()" title="Go Back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <a href="/" class="global-header-logo">
+                <span class="logo-icon">👋</span>
+                <span class="logo-text">ISL Translator</span>
+            </a>
+        </div>
+
+        <nav class="global-header-nav">
+            <a href="/">Home</a>
+            <a href="/translator">Translator</a>
+            <a href="/learning">Learning</a>
+            <a href="/about">About</a>
+            <a href="/features">Features</a>
+            {% if session.get('user_id') %}
+            <a href="/logout" class="auth-btn logout-btn">Logout</a>
+            {% else %}
+            <a href="/login" class="auth-btn login-btn">Sign In</a>
+            <a href="/signup" class="auth-btn signup-btn">Sign Up</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <div class="learning-container">
+
+        <!-- SIDEBAR PROGRESS -->
+        <aside class="sidebar">
+            <div class="progress-header">
+                <h3>Your Journey</h3>
+                <div class="total-progress-bar">
+                    <div class="total-progress-fill" id="totalProgress"></div>
+                </div>
+                <p><span id="progressPercent">0</span>% Completed</p>
+            </div>
+
+            <ul class="level-list">
+                <li class="level-item active" onclick="switchLevel(1)" id="nav-lvl-1">
+                    <div class="level-indicator">1</div>
+                    Practice Library
+                </li>
+                <li class="level-item locked" onclick="switchLevel(2)" id="nav-lvl-2">
+                    <div class="level-indicator">2</div>
+                    Practice Mode
+                </li>
+                <li class="level-item locked" onclick="switchLevel(3)" id="nav-lvl-3">
+                    <div class="level-indicator">3</div>
+                    Quiz Challenge
+                </li>
+                <li class="level-item locked" onclick="switchLevel(4)" id="nav-lvl-4">
+                    <div class="level-indicator">4</div>
+                    Sentences
+                </li>
+                <li class="level-item locked" onclick="switchLevel(5)" id="nav-lvl-5">
+                    <div class="level-indicator">5</div>
+                    Match Game
+                </li>
+                <li class="level-item locked" onclick="switchLevel(6)" id="nav-lvl-6">
+                    <div class="level-indicator">6</div>
+                    Speed Challenge
+                </li>
+                <li class="level-item locked" onclick="switchLevel(7)" id="nav-lvl-7">
+                    <div class="level-indicator">7</div>
+                    Memory Flip
+                </li>
+                <li class="level-item locked" onclick="switchLevel(8)" id="nav-lvl-8">
+                    <div class="level-indicator">8</div>
+                    Sentence Build
+                </li>
+                <li class="level-item locked" onclick="switchLevel(9)" id="nav-lvl-9">
+                    <div class="level-indicator">9</div>
+                    Adv. Quiz
+                </li>
+                <!-- Certificate is hidden until completion -->
+                <li class="level-item locked" onclick="switchLevel(10)" id="nav-lvl-10" style="display:none">
+                    <div class="level-indicator">🏆</div>
+                    Certificate
+                </li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- LEVEL 1: PRACTICE LIBRARY (Formerly Level 10) -->
+            <section id="level-1" class="level-section active">
+                <div class="level-header">
+                    <h2>Level 1: Practice Library</h2>
+                    <p>Explore and practice at your own pace.</p>
+                </div>
+
+                <div class="filter-bar">
+                    <button class="btn btn-sm active" onclick="filterPractice('all')">All</button>
+                    <button class="btn btn-sm" onclick="filterPractice('alpha')">Alphabets</button>
+                    <button class="btn btn-sm" onclick="filterPractice('num')">Numbers</button>
+                    <button class="btn btn-sm" onclick="filterPractice('word')">Words</button>
+                </div>
+
+                <div class="grid-container" id="practiceGrid">
+                    <!-- All Cards -->
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                    <button class="btn btn-primary" onclick="completeLevel(1)">Next Level ➡</button>
+                </div>
+            </section>
+
+            <!-- LEVEL 2: PRACTICE MODE (Formerly Level 4) -->
+            <section id="level-2" class="level-section">
+                <div class="level-header">
+                    <h2>Level 2: Practice Mode</h2>
+                    <p>Test your skills with the AI Camera.</p>
+                </div>
+
+                <div class="practice-area">
+                    <div class="dropdown">
+                        <select id="practiceTarget" class="btn btn-secondary">
+                            <option value="A">Practice 'A'</option>
+                            <option value="B">Practice 'B'</option>
+                            <option value="C">Practice 'C'</option>
+                            <option value="HELLO">Practice 'Hello'</option>
+                        </select>
+                    </div>
+
+                    <div class="webcam-container">
+                        <div id="webcamPlaceholder"
+                            style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <p style="margin-bottom: 20px;">Camera is OFF</p>
+                            <button class="btn btn-primary" onclick="startPractice()">Start Camera</button>
+                        </div>
+                        <!-- IMG tag for streaming -->
+                        <img id="videoStream" src="" alt="Webcam Feed"
+                            style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                    </div>
+
+                    <div class="feedback-box" id="feedbackMsg">
+                        Waiting for input...
+                    </div>
+
+                    <button class="btn btn-danger" onclick="stopPractice()" style="margin-top: 10px;">Stop
+                        Camera</button>
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(1)">⬅ Previous</button>
+                    <button class="btn btn-primary" onclick="completeLevel(2)">Next Level ➡</button>
+                </div>
+            </section>
+
+            <!-- LEVEL 3: QUIZ (Formerly Level 5) -->
+            <section id="level-3" class="level-section">
+                <div class="level-header">
+                    <h2>Level 3: Quiz Challenge</h2>
+                    <p>Test your knowledge with our interactive quiz.</p>
+                </div>
+
+                <!-- View 1: Start Screen -->
+                <div id="quizStartScreen" class="quiz-view active">
+                    <div class="quiz-intro-card">
+                        <h3>Select Difficulty</h3>
+                        <div class="difficulty-grid">
+                            <button id="btn-quiz-beginner" class="btn btn-outline" onclick="startQuiz('beginner')">🟢
+                                Beginner
+                                (Alphabets)</button>
+                            <button id="btn-quiz-intermediate" class="btn btn-outline"
+                                onclick="startQuiz('intermediate')" disabled>🟡 Intermediate
+                                (Numbers)</button>
+                            <button id="btn-quiz-advanced" class="btn btn-outline" onclick="startQuiz('advanced')"
+                                disabled>🔴 Advanced (Words)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View 2: Game Screen -->
+                <div id="quizGameScreen" class="quiz-view">
+                    <div class="quiz-header">
+                        <span id="quizProgressText">Question 1 of 10</span>
+                        <span id="quizScoreDisplay">Score: 0</span>
+                    </div>
+                    <div class="quiz-progress-bar">
+                        <div id="quizProgressBarFill"></div>
+                    </div>
+
+                    <div class="quiz-main-area">
+                        <div class="quiz-image-container">
+                            <img id="quizQuestionImg" src="" alt="Quiz Question">
+                        </div>
+                        <div class="quiz-options-grid" id="quizOptions">
+                            <!-- Generated Options -->
+                        </div>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button id="btnNextQuestion" class="btn btn-primary" onclick="nextQuestion()" disabled>Next
+                            Question ➡</button>
+                    </div>
+                </div>
+
+                <!-- View 3: Result Screen -->
+                <div id="quizResultScreen" class="quiz-view">
+                    <div class="result-card">
+                        <div class="score-circle">
+                            <span id="finalScoreVal">8</span>/10
+                        </div>
+                        <h3 id="resultMessage">Great Job!</h3>
+                        <div class="result-stats">
+                            <p>✅ Correct: <span id="resCorrect">8</span></p>
+                            <p>❌ Wrong: <span id="resWrong">2</span></p>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-primary" onclick="showQuizStart()">🔄 Restart Quiz</button>
+                            <button class="btn btn-secondary" onclick="switchLevel(3)">⬅ Back to Learning</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(2)">⬅ Previous</button>
+                    <button id="btn-level3-next" class="btn btn-primary" onclick="completeLevel(3)" disabled>Next Level
+                        ➡</button>
+                </div>
+            </section>
+
+            <!-- LEVEL 4: SENTENCES (Formerly Level 6) -->
+            <section id="level-4" class="level-section">
+                <div class="level-header">
+                    <h2>Level 4: Sentence Learning</h2>
+                    <p>Master these useful sentences.</p>
+                </div>
+
+                <!-- Sentence Wizard Container -->
+                <div class="sentence-wizard">
+                    <div class="wizard-progress">
+                        <p id="sentProgressText">Sentence 1 of 5</p>
+                        <div class="wizard-bar">
+                            <div class="wizard-fill" id="sentProgressFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="sentence-card-container" id="sentenceCardContainer">
+                        <!-- Dynamic Content Loaded Here -->
+                        <div class="card-media large-media">
+                            <img id="sentImage" src="" alt="Sentence Animation">
+                        </div>
+                        <div class="sentence-text-area">
+                            <h2 id="sentText">...</h2>
+                            <button class="btn btn-secondary icon-btn" onclick="playSentenceAudio()">
+                                🔊 Play Audio
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="wizard-nav">
+                        <button class="btn btn-secondary" onclick="prevSentence()" id="btnPrevSent" disabled>⬅
+                            Previous</button>
+                        <button class="btn btn-primary" onclick="nextSentence()" id="btnNextSent">Next ➡</button>
+                    </div>
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(3)">⬅ Back to Quiz</button>
+                    <button class="btn btn-primary" onclick="completeLevel(4)">Complete Level ➡</button>
+                </div>
+            </section>
+
+            <!-- LEVEL 5: MATCH THE SIGN (Formerly Level 7) -->
+            <section id="level-5" class="level-section">
+                <div class="level-header">
+                    <h2>Level 5: Match the Sign</h2>
+                    <p>Drag the word to the correct sign! (Score: +10 Match, -2 Wrong)</p>
+                </div>
+
+                <div class="game-score-board">
+                    <span>Score: <b id="matchGameScore">0</b></span>
+                    <span>Moves: <b id="matchGameMoves">0</b></span>
+                </div>
+
+                <div class="game-container" style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                    <div id="game-signs" class="game-column" style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Drop Zones (Signs) -->
+                    </div>
+                    <div id="game-words" class="game-column" style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Draggable Words -->
+                    </div>
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(4)">⬅ Previous</button>
+                    <button class="btn btn-primary" onclick="completeLevel(5)">Next Level ➡</button>
+                </div>
+            </section>
+
+            <!-- LEVEL 6: SPEED RECOGNITION (Formerly Level 8) -->
+            <section id="level-6" class="level-section">
+                <div class="level-header">
+                    <h2>Level 6: Speed Recognition</h2>
+                    <p>Identify the sign before time runs out!</p>
+                </div>
+
+                <div id="speedGameArea" class="game-area">
+                    <div class="timer-ring">
+                        <svg class="timer-svg" width="100" height="100">
+                            <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+                            <circle id="timerCircle" class="timer-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div id="timeLeftDisplay" class="timer-text">5</div>
+                    </div>
+
+                    <div class="speed-question">
+                        <img id="speedMsgImg" src="" alt="Sign">
+                    </div>
+
+                    <div id="speedOptions" class="speed-options-grid">
+                        <!-- Options generated here -->
+                    </div>
+
+                    <div class="speed-stats">
+                        Score: <span id="speedScore">0</span>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="startSpeedGame()" id="btnStartSpeed">Start
+                        Challenge</button>
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(5)">⬅ Previous</button>
+                    <button class="btn btn-primary" onclick="completeLevel(6)">Next Level ➡</button>
+                </div>
+            </section>
+
+            <!-- LEVEL 7: MEMORY FLIP (Formerly Level 9) -->
+            <section id="level-7" class="level-section">
+                <div class="level-header">
+                    <h2>Level 7: Memory Flip</h2>
+                    <p>Find matching pairs of signs and words.</p>
+                </div>
+
+                <div class="memory-stats">
+                    <span>Moves: <b id="memMoves">0</b></span>
+                    <span>Pairs Found: <b id="memPairs">0</b>/6</span>
+                </div>
+
+                <div class="memory-grid" id="memoryGrid">
+                    <!-- Cards Generated Here -->
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(6)">⬅ Previous</button>
+                    <button class="btn btn-primary" onclick="completeLevel(7)">Next Level ➡</button>
+                </div>
+            </section>
+
+
+
+            <!-- LEVEL 8: SENTENCE BUILDING (Formerly Level 11) -->
+            <section id="level-8" class="level-section">
+                <div class="level-header">
+                    <h2>Level 8: Sentence Building</h2>
+                    <p>Arrange the signs in the correct order!</p>
+                </div>
+
+                <div class="sentence-game-box">
+                    <div class="target-sentence">
+                        <h3>Target: <span id="targetSentText">"I NEED HELP"</span></h3>
+                    </div>
+
+                    <div class="drop-sequence-zone" id="sentDropZone">
+                        <span class="placeholder-text">Drag signs here in order...</span>
+                    </div>
+
+                    <div class="scrambled-pool" id="sentPool">
+                        <!-- Draggables -->
+                    </div>
+
+                    <button class="btn btn-primary" onclick="checkSentenceOrder()">Check Order</button>
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(7)">⬅ Previous</button>
+                    <button class="btn btn-primary" onclick="completeLevel(8)">Next Level ➡</button>
+                </div>
+            </section>
+
+            <!-- LEVEL 9: ADVANCED QUIZ (Formerly Level 12) -->
+            <section id="level-9" class="level-section">
+                <div class="level-header">
+                    <h2>Level 9: Advanced Quiz</h2>
+                    <p>No text hints. Pure visual recognition.</p>
+                </div>
+
+                <!-- Reusing Quiz UI Structure with ID modifications -->
+                <div id="advQuizArea" class="quiz-view active">
+                    <div class="quiz-header">
+                        <span id="advQuizProgress">Question 1 of 10</span>
+                        <span id="advQuizScore">Score: 0</span>
+                    </div>
+                    <div class="quiz-image-container large">
+                        <img id="advQuizImg" src="" alt="?">
+                    </div>
+                    <div class="quiz-options-grid" id="advQuizOptions">
+                    </div>
+                    <button class="btn btn-primary" id="advQuizNextBtn" onclick="nextAdvQuestion()" disabled
+                        style="margin-top:20px;">Next ➡</button>
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(8)">⬅ Previous</button>
+                    <button class="btn btn-primary" onclick="completeLevel(9)">Next Level ➡</button>
+                </div>
+            </section>
+
+            <!-- CERTIFICATE (Formerly Level 13) -->
+            <section id="level-10" class="level-section">
+                <div class="level-header">
+                    <h2>🎉 Course Completion</h2>
+                    <p>Claim your certificate of achievement.</p>
+                </div>
+
+                <div class="certificate-form">
+                    <h3>Final Score: <span id="totalFinalScore">0</span> / 1000</h3>
+                    <div class="input-group">
+                        <label>Enter Name for Certificate:</label>
+                        <input type="text" id="certNameInput" placeholder="Your Name">
+                    </div>
+                    <button class="btn btn-primary pulse-btn" onclick="generateCertificate()">🎓 Generate
+                        Certificate</button>
+                </div>
+
+                <!-- Hidden Certificate Container for Print -->
+                <div id="certificateTemplate" style="display:none;">
+                    <div class="cert-border">
+                        <div class="cert-content">
+                            <h1>Certificate of Completion</h1>
+                            <p>This certifies that</p>
+                            <h2 id="certNameDisplay">User Name</h2>
+                            <p>has successfully completed the course</p>
+                            <h3>Indian Sign Language - Beginner to Advanced</h3>
+                            <p>with a score of <b id="certScoreDisplay">0</b></p>
+                            <div class="cert-footer">
+                                <span>Date: <span id="certDate"></span></span>
+                                <span>ISL Translator Academy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="level-nav">
+                    <button class="btn btn-secondary" onclick="switchLevel(9)">⬅ Previous</button>
+                    <button class="btn btn-secondary" onclick="window.print()">🖨 Print / Save PDF</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- INFO MODAL -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Letter A</h2>
+            <div id="modalContent" class="large-sign-preview">🤘</div>
+            <p>This is the sign for <span id="modalMeta">A</span>.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

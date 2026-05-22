@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>About | ISL Translator</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global-header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <script defer src="{{ url_for('static', filename='js/about.js') }}"></script>
+</head>
+
+<body>
+
+    <!-- ================= GLOBAL HEADER ================= -->
+    <header class="global-header">
+        <div class="global-header-left">
+            <button class="back-btn" onclick="window.history.back()" title="Go Back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <a href="/" class="global-header-logo">
+                <span class="logo-icon">👋</span>
+                <span class="logo-text">ISL Translator</span>
+            </a>
+        </div>
+
+        <nav class="global-header-nav">
+            <a href="/">Home</a>
+            <a href="/translator">Translator</a>
+            <a href="/learning">Learning</a>
+            <a href="/about">About</a>
+            <a href="/features">Features</a>
+            {% if session.get('user_id') %}
+            <a href="/logout" class="auth-btn logout-btn">Logout</a>
+            {% else %}
+            <a href="/login" class="auth-btn login-btn">Sign In</a>
+            <a href="/signup" class="auth-btn signup-btn">Sign Up</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="about-hero reveal">
+        <span class="pill">About Us</span>
+
+        <h1>
+            Empowering Communication <br>
+            Through <span>Technology</span>
+        </h1>
+
+        <p>
+            We're on a mission to make Indian Sign Language accessible to everyone,
+            breaking communication barriers and fostering inclusivity.
+        </p>
+    </section>
+
+    <!-- ================= OUR STORY ================= -->
+    <section class="story reveal">
+        <div class="story-content">
+            <h2>Our Story</h2>
+
+            <p>
+                The Indian Sign Language Translator was born from a simple observation:
+                millions of people in India use sign language, yet communication barriers
+                persist in everyday life.
+            </p>
+
+            <p>
+                We envisioned a world where technology could bridge this gap, making
+                conversations natural and effortless for everyone.
+            </p>
+
+            <p>
+                Today, we proudly offer a platform that translates, educates, empowers,
+                and connects people across communication divides.
+            </p>
+        </div>
+
+        <div class="story-image">
+            <img src="{{ url_for('static', filename='images/family.png') }}" alt="ISL Story">
+        </div>
+    </section>
+
+    <!-- ================= WHAT DRIVES US ================= -->
+    <section class="drive reveal">
+        <h2>What Drives Us</h2>
+        <p class="subtitle">
+            Learn more about our mission, vision, and how we're making a difference.
+        </p>
+
+        <div class="drive-grid">
+
+            <div class="drive-card">
+                <div class="icon blue">🎯</div>
+                <h3>Our Mission</h3>
+                <p>
+                    To create a world where communication barriers no longer exist
+                    and everyone is heard and understood.
+                </p>
+            </div>
+
+            <div class="drive-card">
+                <div class="icon pink">❤️</div>
+                <h3>Our Vision</h3>
+                <p>
+                    Building an inclusive society where sign language is recognized,
+                    respected, and accessible to all.
+                </p>
+            </div>
+
+            <div class="drive-card">
+                <div class="icon orange">💡</div>
+                <h3>How It Works</h3>
+                <p>
+                    Using AI-powered hand detection and gesture recognition to translate
+                    ISL in real time.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= IMPACT ================= -->
+    <section class="impact reveal">
+        <h2>Making an Impact</h2>
+        <p class="subtitle">Together, we're building a more inclusive world.</p>
+
+        <div class="impact-grid">
+            <div class="impact-box">
+                <h3>10K+</h3>
+                <p>Active Users</p>
+            </div>
+            <div class="impact-box">
+                <h3>50K+</h3>
+                <p>Translations</p>
+            </div>
+            <div class="impact-box">
+                <h3>100+</h3>
+                <p>Sign Gestures</p>
+            </div>
+            <div class="impact-box">
+                <h3>99%</h3>
+                <p>Accuracy</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        © 2026 ISL Translator | Empowering Inclusive Communication
+    </footer>
+
+</body>
+
+</html>

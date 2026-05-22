@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #1e2a38;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    color: #1e2a38;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 15px;
+}
+
+/* BUTTONS */
+.buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.btn-secondary {
+    background-color: #28a745;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* ABOUT SECTION */
+.about {
+    background-color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.about h2 {
+    color: #1e2a38;
+}
+/* FORM STYLE */
+.form-container {
+    width: 350px;
+    margin: 100px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.form-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.error {
+    color: red;
+}
+.translator-container {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.output-box {
+    margin-top: 40px;
+    background: white;
+    padding: 20px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.output-box h3 {
+    color: #1e2a38;
+}
+
+.output-box p {
+    font-size: 20px;
+    color: #007bff;
+    font-weight: bold;
+}
