@@ -108,9 +108,9 @@ The system uses **MobileNetV2 CNN** for gesture classification.
 ## 🤟 Sign to Text Translator
 
 <p align="center">
-  <img src="images/sign-translator1.png" width="300">
-  <img src="images/sign-translator2.png" width="300">
-  <img src="images/sign-translator3.png" width="300">
+  <img src="./images/Sign%20Translator.png" width="300">
+  <img src="./images/Sign%20Translator2.png" width="300">
+  <img src="./images/Sign%20Translator3.png" width="300">
 </p>
 
 ---
@@ -118,8 +118,8 @@ The system uses **MobileNetV2 CNN** for gesture classification.
 ## 🗣️ Text to Sign Translator
 
 <p align="center">
-  <img src="images/text-translator1.png" width="400">
-  <img src="images/text-translator2.png" width="400">
+  <img src="./images/Text%20Translator.png" width="400">
+  <img src="./images/Text%20Translator2.png" width="400">
 </p>
 
 ---
@@ -127,8 +127,8 @@ The system uses **MobileNetV2 CNN** for gesture classification.
 ## 📚 Learning Module
 
 <p align="center">
-  <img src="images/learning.png" width="400">
-  <img src="images/learning2.png" width="400">
+  <img src="./images/Learning.png" width="400">
+  <img src="./images/Learning2.png" width="400">
 </p>
 
 ---
@@ -136,7 +136,7 @@ The system uses **MobileNetV2 CNN** for gesture classification.
 ## 🏆 Certificate Generation
 
 <p align="center">
-  <img src="images/certificate.png" width="500">
+  <img src="./images/Certificate.png" width="500">
 </p>
 
 ## 🗄️ Database Tables
