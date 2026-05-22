@@ -105,33 +105,39 @@ The system uses **MobileNetV2 CNN** for gesture classification.
 
 # 📸 Output Screenshots
 
-## 🏠 Home Page
-<p align="center">
-  <img src="images/home.png" width="800">
-</p>
+## 🤟 Sign to Text Translator
 
-## 🔐 Login & Signup
 <p align="center">
-  <img src="images/login.png" width="400">
-  <img src="images/signup.png" width="400">
-</p>
-
-## 🤟 Sign to Text & Voice
-<p align="center">
-  <img src="images/sign-to-text.png" width="800">
-</p>
-
-## 🗣️ Text & Voice to Sign
-<p align="center">
-  <img src="images/text-to-sign.png" width="800">
-</p>
-
-## 📚 Learning Module
-<p align="center">
-  <img src="images/learning.png" width="800">
+  <img src="images/sign-translator1.png" width="300">
+  <img src="images/sign-translator2.png" width="300">
+  <img src="images/sign-translator3.png" width="300">
 </p>
 
 ---
+
+## 🗣️ Text to Sign Translator
+
+<p align="center">
+  <img src="images/text-translator1.png" width="400">
+  <img src="images/text-translator2.png" width="400">
+</p>
+
+---
+
+## 📚 Learning Module
+
+<p align="center">
+  <img src="images/learning.png" width="400">
+  <img src="images/learning2.png" width="400">
+</p>
+
+---
+
+## 🏆 Certificate Generation
+
+<p align="center">
+  <img src="images/certificate.png" width="500">
+</p>
 
 ## 🗄️ Database Tables
 
